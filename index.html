@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Background Audio -->
+    <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+
+    <!-- PHASE 1: SPLIT PASSCODE SCREEN -->
+    <div id="passcode-screen" class="screen active">
+        <div class="split-container">
+            <!-- Left Side: Widescreen Polaroid Preview -->
+            <div class="preview-side">
+                <div class="main-polaroid">
+                    <img src="photo1.jpg" alt="Memory Photo">
+                    <div class="handwritten-caption">Happy Birthday Samantha! ❤️</div>
+                </div>
+            </div>
+
+            <!-- Right Side: Lock Keypad -->
+            <div class="lock-side">
+                <div class="lock-box">
+                    <div class="status-label">ENTER PASSCODE</div>
+                    <div id="passcode-display"></div>
+                    
+                    <div class="keypad">
+                        <button onclick="pressKey('1')">1</button>
+                        <button onclick="pressKey('2')">2</button>
+                        <button onclick="pressKey('3')">3</button>
+                        <button onclick="pressKey('4')">4</button>
+                        <button onclick="pressKey('5')">5</button>
+                        <button onclick="pressKey('6')">6</button>
+                        <button onclick="pressKey('7')">7</button>
+                        <button onclick="pressKey('8')">8</button>
+                        <button onclick="pressKey('9')">9</button>
+                        <button onclick="clearPasscode()">C</button>
+                        <button onclick="pressKey('0')">0</button>
+                        <button onclick="checkPasscode()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 2: LOADING SCREEN WITH MINI CAKE -->
+    <div id="loading-screen" class="screen">
+        <div class="loader-box">
+            <div class="loading-cake">
+                <div class="load-candle">
+                    <div class="load-flame"></div>
+                </div>
+                <div class="load-frosting"></div>
+                <div class="load-cake-layer"></div>
+            </div>
+            <div class="loader-text">Preparing something special...</div>
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 3: SURPRISE BOARD -->
+    <div id="surprise-screen" class="screen">
+        <div class="main-layout">
+            <h1 class="main-title">Happy Birthday! 💕</h1>
+
+            <!-- Hero Banner Section -->
+            <div class="hero-banner">
+                <img src="photo2.jpg" class="hero-img" alt="Hero Banner Photo">
+                <div class="hero-overlay-text">
+                    <h2>Happy Birthday Samantha!</h2>
+                    <p>I hope this little gift can make you happy.<br>This gift is as simple as it is thoughtful, written and built for you.</p>
+                </div>
+            </div>
+
+            <!-- Content Grid: Birthday Letter + Side Photos -->
+            <div class="content-grid">
+                <!-- Left Column: Letter -->
+                <div class="letter-card">
+                    <div class="card-header">
+                        <span>♥</span> <strong>HAPPY BIRTHDAY</strong>
+                    </div>
+                    <hr class="divider">
+                    <div class="letter-body">
+                        <p>Dear, Samantha! 🥳✨</p>
+                        <p>Wishing you a truly wonderful day filled with all your favorite things! May this new year bring you endless joy, great health, and success in everything you set your mind to. Hope all your big dreams and goals come true, and that life keeps bringing you amazing moments, continuous growth, and pure happiness and may you also sell more cookies hehe.</p>
+                        <p>Enjoy your special day to the fullest! 🎉🎂</p>
+                        <p class="signature">Yours, Jk the divorced single dad</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Stacked Photos -->
+                <div class="gallery-column">
+                    <div class="stacked-photo">
+                        <img src="photo3.jpg" alt="Memory Photo 3">
+                    </div>
+                    <div class="stacked-photo">
+                        <img src="photo4.jpg" alt="Memory Photo 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Cake Section -->
+            <div class="cake-section">
+                <div class="cake" onclick="blowCandles()">
+                    <div class="candle-container">
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                    </div>
+                    <div class="frosting"></div>
+                    <div class="cake-layer"></div>
+                </div>
+                <p id="cake-instruction">Click the cake to blow out the candles! 🕯️️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 4: DEDICATED FIREWORKS CELEBRATION SCREEN -->
+    <div id="fireworks-screen" class="screen">
+        <canvas id="fireworks-canvas"></canvas>
+        <div class="fireworks-center-text">
+            <h1 class="animated-bday-text">Happy Birthday to You! 🎉</h1>
+            <p class="animated-sub-text">Wishing you endless joy, love, and happiness today and always! ❤️</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

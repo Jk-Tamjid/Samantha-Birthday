@@ -1,0 +1,464 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #d62828;
+    color: #fff;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* Base App Screen Views */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #d62828;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Base Image Styling */
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: inherit;
+}
+
+/* PHASE 1: Split Screen Setup */
+.split-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    height: 500px;
+    padding: 20px;
+    align-items: center;
+}
+
+.preview-side, .lock-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Widescreen Polaroid Styling */
+.main-polaroid {
+    background: #ffffff;
+    padding: 16px 16px 24px 16px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transform: rotate(-3deg);
+    width: 320px;
+}
+
+.main-polaroid img {
+    height: 320px;
+    object-fit: cover;
+    background-color: #eee;
+}
+
+.handwritten-caption {
+    color: #d62828;
+    font-family: 'Georgia', serif;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Keypad Styling */
+.lock-box {
+    text-align: center;
+    width: 280px;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+#passcode-display {
+    font-size: 2.2rem;
+    letter-spacing: 12px;
+    height: 50px;
+    margin-bottom: 25px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 10px;
+}
+
+.keypad button {
+    height: 60px;
+    font-size: 1.3rem;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.keypad button:active {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+}
+
+/* PHASE 2: Loading Screen Layout */
+.loader-box {
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-cake {
+    position: relative;
+    width: 80px;
+    height: 45px;
+    background: #fff;
+    border-radius: 6px 6px 0 0;
+    margin-bottom: 25px;
+    animation: bounce 0.6s infinite alternate cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.load-cake-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 12px;
+    background: #ffc107;
+}
+
+.load-frosting {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 8px;
+    background: #e91e63;
+    border-radius: 6px 6px 0 0;
+}
+
+.load-candle {
+    width: 4px;
+    height: 15px;
+    background: #00bcd4;
+    position: absolute;
+    top: -15px;
+    left: 38px;
+}
+
+.load-flame {
+    width: 6px;
+    height: 10px;
+    background: #ff5722;
+    border-radius: 50% 50% 20% 20%;
+    position: absolute;
+    top: -11px;
+    left: -1px;
+    box-shadow: 0 0 6px #ffeb3b;
+    animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+.loader-text {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.1s linear;
+}
+
+/* PHASE 3: Surprise Board Layout */
+#surprise-screen {
+    overflow-y: scroll;
+    display: block; 
+    padding: 40px 20px;
+}
+
+.main-layout {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    height: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.hero-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.hero-overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding: 25px;
+    z-index: 2;
+}
+
+.hero-overlay-text h2 {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.hero-overlay-text p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+}
+
+.letter-card {
+    background: #ffffff;
+    color: #333333;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d62828;
+}
+
+.divider {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px dashed #dddddd;
+}
+
+.letter-body p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.signature {
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stacked-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Cake Section */
+.cake-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.cake {
+    position: relative;
+    width: 160px;
+    height: 90px;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    margin: 30px auto 15px auto;
+    cursor: pointer;
+}
+
+.cake-layer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    background: #ffc107;
+}
+
+.frosting {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 15px;
+    background: #e91e63;
+    border-radius: 10px 10px 0 0;
+}
+
+.candle-container {
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 25px;
+}
+
+.candle {
+    width: 6px;
+    height: 25px;
+    background: #00bcd4;
+    position: relative;
+}
+
+.flame {
+    width: 10px;
+    height: 15px;
+    background: #ff5722;
+    border-radius: 50% 50% 20% 20%;
+    position: absolute;
+    top: -16px;
+    left: -2px;
+    box-shadow: 0 0 8px #ffeb3b;
+    animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* PHASE 4: FIREWORKS CELEBRATION SCREEN */
+#fireworks-screen {
+    background: #0d0d1a !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 101;
+    pointer-events: none;
+}
+
+.fireworks-center-text {
+    position: relative;
+    z-index: 102;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+.animated-bday-text {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #ff007f, #ffeb3b, #00e5ff, #ff007f);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease infinite, pulseGlow 1.8s ease-in-out infinite alternate;
+}
+
+.animated-sub-text {
+    font-size: 1.3rem;
+    color: #ffffff;
+    opacity: 0.95;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.95); filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.6)); }
+    100% { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(0, 229, 255, 0.9)); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 0.95; transform: translateY(0); }
+}
